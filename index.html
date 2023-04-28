@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI 갤러리</title>
+    <link rel="stylesheet" href="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/easygpt/default.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous">
+      
+    </script>
+    <script>
+      const clientId = '0hJFcY1639HsfcOeWk1sCpO-07RwDxLoT7WlCOteWPI';
+      const query = 'nature';
+      const cardTitleSelectors = [
+        '.card-title',
+        '.card-title1',
+        '.card-title2',
+        '.card-title3',
+        '.card-title4',
+        '.card-title5',
+      ];
+      const cardTextSelectors = [
+        '.card-text',
+        '.card-text1',
+        '.card-text2',
+        '.card-text3',
+        '.card-text4',
+        '.card-text5',
+      ];
+
+      fetch(`https://api.unsplash.com/photos/random?query=${query}&client_id=${clientId}`)
+        .then(response => response.json())
+        .then(data => {
+          const {user, description} = data;
+          const name = user.name;
+          const text = `${name}: ${description}`;
+
+          for (let i = 0; i < cardTitleSelectors.length; i++) {
+            document.querySelector(cardTitleSelectors[i]).textContent = name;
+          }
+          for (let i = 0; i < cardTextSelectors.length; i++) {
+            document.querySelector(cardTextSelectors[i]).textContent = text;
+          }
+        })
+        .catch(error => console.error(error));
+    </script>
+    <style>
+        .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="hero bg-dark text-center py-5 mb-4">
+        <h1 class="text-white">AI 갤러리</h1>
+        <h2 class="text-white">랜덤 이미지를 감상해보세요!</h2>
+    </div>
+    <div class="container">
+      <form class="form-inline col-md-4 mb-4">
+        <!-- 변경된 부분: class="form-inline" 추가 -->
+            <button type="button" class="btn btn-primary" onclick="window.location.href = 'index5.html';">이미지 생성해보기</button>
+       </form>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="https://source.unsplash.com/1600x900/?Musée" class="card-img-top" alt="컬렉션1">
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Musée</h6>
+                <p class="card-text">컬렉션1</p>
+                <a href="https://naver.com/" class="card-link stretched-link" target="_blank"></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="https://source.unsplash.com/1600x900/?museum of thought" class="card-img-top" alt="컬렉션2">
+              <div class="card-body">
+                <h5 class="card-title1">컬렉션2</h5>
+                <h6 class="card-subtitle mb-2 text-muted">museum of thought</h6>
+                <p class="card-text1"></p>
+                <a href="https://naver.com/" class="card-link stretched-link" target="_blank"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="https://source.unsplash.com/1600x900/?Van Gogh Museum" class="card-img-top" alt="컬렉션3">
+              <div class="card-body">
+                <h5 class="card-title2">컬렉션3</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Van Gogh Museum</h6>
+                <p class="card-text2"></p>
+                <a href="https://naver.com/" class="card-link stretched-link" target="_blank"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="https://source.unsplash.com/1600x900/?Paintings" class="card-img-top" alt="컬렉션4">
+              <div class="card-body">
+                <h5 class="card-title3">컬렉션4</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Paintings</h6>
+                <p class="card-text3"></p>
+                <a href="https://spartacodingclub.kr/" class="card-link stretched-link" target="_blank"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="https://source.unsplash.com/1600x900/?Drawing" class="card-img-top" alt="컬렉션5">
+              <div class="card-body">
+                <h5 class="card-title4">컬렉션5</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Drawing</h6>
+                <p class="card-text4"></p>
+                <a href="https://spartacodingclub.kr/" class="card-link stretched-link" target="_blank"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="https://source.unsplash.com/1600x900/?ARTE" class="card-img-top" alt="컬렉션6">
+              <div class="card-body">
+                <h5 class="card-title5">컬렉션6</h5>
+                <h6 class="card-subtitle mb-2 text-muted">ARTE</h6>
+                <p class="card-text5"></p>
+                <a href="https://spartacodingclub.kr/" class="card-link stretched-link" target="_blank"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+</body>
+
+</html>

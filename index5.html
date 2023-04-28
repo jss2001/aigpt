@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AI 갤러리</title>
+        <link rel="stylesheet" href="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/easygpt/default.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous">
+          
+        </script>
+            <script>
+                function generateImage() {
+                 var promptText = document.querySelector('input').value;
+                 var data = {
+                     "model": "image-alpha-001",
+                     "prompt": promptText,
+                     "num_images": 3 // 이미지를 3개 생성한다.
+                 }
+         
+                 fetch('https://api.openai.com/v1/images/generations', {
+                     method: 'POST',
+                     headers: {
+                     'Content-Type': 'application/json',
+                     'Authorization': 'Bearer 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' // API KEY 키 입력
+                     },
+                     body: JSON.stringify(data)
+                 })
+                 .then(response => response.json())
+                 .then(data => {
+                     console.log(data);
+         
+                     // 각 카드 이미지에 이미지 적용
+                     document.getElementById('card-img-1').src = data.data[0].url;
+                     document.getElementById('card-img-2').src = data.data[1].url;
+                     document.getElementById('card-img-3').src = data.data[2].url;
+         
+                     // 카드 제목 갱신
+                     document.querySelectorAll('.card-title').forEach((title, i) => {
+                     title.textContent = data.data[i].caption;
+                 });
+                 })
+                 }
+         
+             </script>
+        <style>
+            .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+            }
+
+            #image-container {
+            margin-top: 30px;
+            }
+            
+        </style>
+    </head>
+
+  <body>
+    <div class="hero bg-black text-center py-5 mb-4">
+        <h1 class="text-white">AI 갤러리</h1>
+        <h2 class="text-white">랜덤 이미지를 생성해보세요!</h2>
+    </div>
+    <div class="container">
+        <form>
+            <label for="input-text">입력 값:</label>
+            <input type="text" id="input-text" name="input-text">
+            <button type="button" onclick="generateImage()">이미지 생성하기</button>
+          </form>
+          <div id="image-container">
+            <div class="row">
+
+                <!-- 첫 번째 카드 -->
+                <div class="col-md-4">
+                    <div class="card">
+                      <img id="card-img-1" class="card-img-top" src="No_Image_Available.jpg" alt="Card image cap">
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="card">
+                      <img id="card-img-2" class="card-img-top" src="No_Image_Available.jpg" alt="Card image cap">
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="card">
+                      <img id="card-img-3" class="card-img-top" src="No_Image_Available.jpg" alt="Card image cap">
+                    </div>
+                  </div>
+            </div>
+          </div>
+    </div>
+  </body>
+</html>
